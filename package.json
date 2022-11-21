@@ -1,0 +1,16 @@
+{
+  "name": "week",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "pnpm run gen-version && node scripts -d examples -s dev",
+    "gen-version": "node scripts/gen-version"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^4.6.4"
+  }
+}
