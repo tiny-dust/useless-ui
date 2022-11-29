@@ -4,15 +4,59 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "pnpm run gen-version && node scripts -d examples -s dev",
+    "dev": "pnpm run gen-version && node scripts/gen-demo.js &&  node scripts -d examples -s dev",
     "clean": "rm -rf node_modules & cd ./examples & rm -rf node_modules",
-    "gen-version": "node scripts/gen-version"
+    "gen-version": "node scripts/gen-version",
+    "gen-demo": "node scripts/gen-demo.js",
+    "gen-template": "node scripts/gen-template.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "typescript": "^4.6.4",
-    "minimist": "^1.2.7"
+    "@tsconfig/svelte": "^3.0.0",
+    "@types/marked": "^4.0.7",
+    "@typescript-eslint/eslint-plugin": "^5.44.0",
+    "eslint": "^8.28.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-config-standard-with-typescript": "^23.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-markdown": "^3.0.0",
+    "eslint-plugin-n": "^15.5.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-svelte3": "^4.0.0",
+    "highlight.js": "^11.7.0",
+    "lint-staged": "^13.0.4",
+    "marked": "^4.2.3",
+    "minimist": "^1.2.7",
+    "prettier": "^2.8.0",
+    "typescript": "^4.6.4"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.ts": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.tsx": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.vue": [
+      "prettier --parser=vue --write",
+      "eslint --fix"
+    ],
+    "*.css": [
+      "prettier --write"
+    ],
+    "*.md": [
+      "prettier --write --parser markdown --prose-wrap never",
+      "eslint --fix"
+    ]
   }
 }
