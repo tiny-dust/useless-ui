@@ -6,7 +6,6 @@ const { marked } = require("marked");
 marked.setOptions({
   renderer: new marked.Renderer(),
   highlight: function (code, lang) {
-    console.log(hljs.getLanguage(lang));
     const language = hljs.getLanguage(lang) ? lang : "html";
     return hljs.highlight(code, { language }).value;
   },
@@ -45,9 +44,10 @@ const genDemoSvelte = (content, dirPath) => {
 };
 
 const genComponent = (dirName = "components") => {
+
   // 遍历packages目录下的所有组件
   const packages = fs.readdirSync(packagesDir).filter((file) => {
-    return fs.statSync(path.resolve(packagesDir, file)).isDirectory();
+    return fs.statSync(path.resolve(packagesDir, file)).isDirectory() && !file.includes('.');
   });
 
   // 将packages目录下的demos目录中的 index-entry.md 编译成svelte文件  放到examples/menus目录下
