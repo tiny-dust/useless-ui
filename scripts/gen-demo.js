@@ -1,10 +1,20 @@
-// 遍历packages目录下的所有组件，生成demo文件
 const fs = require("fs");
 const path = require("path");
 const hljs = require("highlight.js");
-const { marked } = require("marked");
+const marked = require("marked");
+const { exec } = require("child_process");
+// Override function
+// const renderer = {
+//   code(text) {
+//     console.log("text: ", text);
+//     return `
+//             <template>
+//               ${text}
+//             <template>`;
+//   },
+// };
+// marked.use({ renderer });
 marked.setOptions({
-  renderer: new marked.Renderer(),
   highlight: function (code, lang) {
     const language = hljs.getLanguage(lang) ? lang : "html";
     return hljs.highlight(code, { language }).value;
@@ -12,10 +22,11 @@ marked.setOptions({
   langPrefix: "hljs language-", // highlight.js css expects a top-level 'hljs' class.
   pedantic: false,
   gfm: true,
-  breaks: false,
+  breaks: true,
   sanitize: false,
   smartLists: true,
   smartypants: false,
+  headerIds: false,
   xhtml: false,
 });
 
@@ -38,16 +49,18 @@ const genDemoSvelte = (content, dirPath) => {
     // 读取demo文件内容
     const demoPath = path.resolve(dirPath, fileName);
     const demoContent = fs.readFileSync(demoPath, "utf-8");
-    const highCode = ` \`\`\`html \n ${demoContent} \n \`\`\` `;
+    const highCode = `\`\`\`html \n${demoContent}\`\`\``;
     return highCode;
   });
 };
 
 const genComponent = (dirName = "components") => {
-
   // 遍历packages目录下的所有组件
   const packages = fs.readdirSync(packagesDir).filter((file) => {
-    return fs.statSync(path.resolve(packagesDir, file)).isDirectory() && !file.includes('.');
+    return (
+      fs.statSync(path.resolve(packagesDir, file)).isDirectory() &&
+      !file.includes(".")
+    );
   });
 
   // 将packages目录下的demos目录中的 index-entry.md 编译成svelte文件  放到examples/menus目录下
@@ -59,8 +72,15 @@ const genComponent = (dirName = "components") => {
         const demoPath = path.resolve(demoDir, file);
         const demoContent = fs.readFileSync(demoPath, "utf-8");
         const demo = genDemoSvelte(demoContent, demoDir);
-        const htmlContent = marked.parse(demoContent.replace(/```demo(.|\n)*?```/g, demo.join("")));
-        const targetDir = path.resolve(__dirname, "../examples/src/", dirName, packageName);
+        const htmlContent = marked.parse(
+          demoContent.replace(/```demo(.|\n)*?```/g, demo.join(""))
+        );
+        const targetDir = path.resolve(
+          __dirname,
+          "../examples/src/",
+          dirName,
+          packageName
+        );
         const targetFile = path.resolve(
           __dirname,
           "../examples/src/",
@@ -71,10 +91,14 @@ const genComponent = (dirName = "components") => {
         if (!fs.existsSync(targetDir)) {
           fs.mkdirSync(targetDir, { recursive: true });
         }
-        fs.writeFileSync(targetFile, htmlContent, { encoding: "utf-8", flag: "w" });
+        fs.writeFileSync(targetFile, `<template>${htmlContent}</template>`, {
+          encoding: "utf-8",
+          flag: "w",
+        });
       }
     });
   });
+  exec("pnpm lint:fix");
 };
 
 genComponent();

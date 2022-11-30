@@ -1,14 +1,19 @@
-<h1 id="卡片-card">卡片 Card</h1>
+<template><h1>卡片 Card</h1>
 <p>就是普普通通的卡片啦</p>
-<h2 id="演示">演示</h2>
+<h2>演示</h2>
 <pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">markdown</span>&gt;</span>
 # 基础使用12312
 <span class="hljs-tag">&lt;/<span class="hljs-name">markdown</span>&gt;</span>
 
 <span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">w-card</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">&quot;title&quot;</span>&gt;</span>Card title<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">&quot;content&quot;</span>&gt;</span>Card content<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">&quot;footer&quot;</span>&gt;</span>Card footer<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">w-card</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
 </code></pre>
-<h2 id="api">API</h2>
+<h2>API</h2>
 <table>
 <thead>
 <tr>
@@ -27,3 +32,4 @@
 <td></td>
 </tr>
 </tbody></table>
+</template>

@@ -1,3 +1,3 @@
-import Button from './button/index.ts';
+import Button from "./button/index.ts";
 
 export { Button };

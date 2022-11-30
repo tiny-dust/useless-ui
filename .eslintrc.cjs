@@ -5,17 +5,24 @@ module.exports = {
     es2021: true,
     node: true,
   },
-  extends: ["plugin:markdown/recommended", "plugin:markdown/recommended", "prettier"],
-  plugins: ["svelte3", "@typescript-eslint", "markdown"],
+  extends: [
+    "plugin:markdown/recommended",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:svelte/prettier",
+    "plugin:prettier/recommended",
+  ],
+  plugins: ["@typescript-eslint", "markdown"],
   overrides: [
     {
       files: "*.js",
       rules: {
         "no-undef": 0,
+        "@typescript-eslint/no-var-requires": 0,
       },
     },
     {
-      files: ["**/*.md/*.ts",'*.md'],
+      files: ["**/*.md/*.ts", "*.md"],
       processor: "markdown/markdown",
       rules: {
         "import/order": 0,
@@ -23,6 +30,7 @@ module.exports = {
         "@typescript-eslint/consistent-type-definitions": 0,
       },
     },
+    // test
     {
       files: ["*.spec.ts", "*.spec.js"],
       globals: {
@@ -34,13 +42,23 @@ module.exports = {
         "@typescript-eslint/no-floating-promises": 0,
       },
     },
+    // svelte
     {
       files: ["*.svelte"],
-      processor: "svelte3/svelte3",
+      parser: "svelte-eslint-parser",
+      parserOptions: {
+        parser: {
+          // Specify a parser for each lang.
+          ts: "@typescript-eslint/parser",
+          js: "espree",
+          typescript: "@typescript-eslint/parser",
+        },
+      },
       rules: {
         "@typescript-eslint/no-floating-promises": 0,
       },
     },
+    // ts
     {
       files: ["*.ts", "*.tsx"],
       extends: ["plugin:import/typescript"],
@@ -56,14 +74,17 @@ module.exports = {
         "@typescript-eslint/naming-convention": 0,
         "multiline-ternary": 0,
         "no-void": 0,
-        "import/no-cycle": 1,
+        "import/no-cycle": 0,
       },
     },
   ],
   parserOptions: {
     ecmaVersion: "latest",
     sourceType: "module",
+    extraFileExtensions: [".svelte"],
   },
+  // 排除的文件
+  ignorePatterns: ["*.demo.svelte"],
   rules: {
     "import/no-cycle": 0,
   },

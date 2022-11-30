@@ -1,6 +1,6 @@
-<h1 id="按钮-button">按钮 Button</h1>
+<template><h1>按钮 Button</h1>
 <p>就是普普通通的按钮啦</p>
-<h2 id="演示">演示</h2>
+<h2>演示</h2>
 <pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">markdown</span>&gt;</span>
 # 基础使用
 <span class="hljs-tag">&lt;/<span class="hljs-name">markdown</span>&gt;</span>
@@ -8,7 +8,7 @@
 <span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
 </code></pre>
-<h2 id="api">API</h2>
+<h2>API</h2>
 <table>
 <thead>
 <tr>
@@ -27,3 +27,4 @@
 <td></td>
 </tr>
 </tbody></table>
+</template>

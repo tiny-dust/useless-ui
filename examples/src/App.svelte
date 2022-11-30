@@ -1,11 +1,8 @@
 <script lang="ts">
-import Button from './components/button/index.svelte'
+  import "./index.css";
+  import Layout from "./layout/index.svelte";
 </script>
 
-<main>
-
-  <div class="card">
-    <Button />
-  </div>
-
-</main>
+<div>
+  <Layout />
+</div>

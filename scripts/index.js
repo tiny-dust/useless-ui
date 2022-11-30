@@ -1,12 +1,10 @@
-const path = require( "path" );
+const path = require("path");
 
 // 获取命令行参数 -d 执行某个子模块的文件夹 -s 启动的脚本命令
-const {d:dir,s:script} = require( "minimist" )( process.argv.slice( 2 ) );
-
-
+const { d: dir, s: script } = require("minimist")(process.argv.slice(2));
 
 // 执行examples下的package.json的命令
-const exec = require( "child_process" ).execSync;
+const exec = require("child_process").execSync;
 
 // 获取当前目录
 const cwd = process.cwd();

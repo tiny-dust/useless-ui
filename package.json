@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "pnpm run gen-version && node scripts/gen-demo.js &&  node scripts -d examples -s dev",
     "clean": "rm -rf node_modules & cd ./examples & rm -rf node_modules",
+    "lint:fix": "eslint --ext .js,.vue,.svelte,.ts,.tsx --fix .",
     "gen-version": "node scripts/gen-version",
     "gen-demo": "node scripts/gen-demo.js",
     "gen-template": "node scripts/gen-template.js"
@@ -25,13 +26,15 @@
     "eslint-plugin-markdown": "^3.0.0",
     "eslint-plugin-n": "^15.5.1",
     "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-svelte3": "^4.0.0",
+    "eslint-plugin-svelte": "^2.13.1",
     "highlight.js": "^11.7.0",
     "lint-staged": "^13.0.4",
     "marked": "^4.2.3",
     "minimist": "^1.2.7",
     "prettier": "^2.8.0",
+    "prettier-plugin-svelte": "^2.8.1",
     "typescript": "^4.6.4"
   },
   "lint-staged": {
