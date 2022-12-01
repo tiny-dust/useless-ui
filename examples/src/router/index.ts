@@ -8,6 +8,6 @@ export const routes = {
 
 export const ComponentsRoutes = {
   "/button": wrap({
-    asyncComponent: () => import("../components/button/index.svelte"),
+    asyncComponent: () => import("../pages/button/index.svelte"),
   }),
 };

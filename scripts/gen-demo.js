@@ -54,7 +54,7 @@ const genDemoSvelte = (content, dirPath) => {
   });
 };
 
-const genComponent = (dirName = "components") => {
+const genComponent = (dirName = "pages") => {
   // 遍历packages目录下的所有组件
   const packages = fs.readdirSync(packagesDir).filter((file) => {
     return (

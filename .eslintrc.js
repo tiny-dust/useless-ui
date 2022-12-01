@@ -1,18 +1,10 @@
 module.exports = {
-  root: true,
   env: {
     browser: true,
     es2021: true,
     node: true,
   },
-  extends: [
-    "plugin:markdown/recommended",
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:svelte/prettier",
-    "plugin:prettier/recommended",
-  ],
-  plugins: ["@typescript-eslint", "markdown"],
+  plugins: ["svelte3", "@typescript-eslint", "markdown"],
   overrides: [
     {
       files: "*.js",
@@ -24,6 +16,7 @@ module.exports = {
     {
       files: ["**/*.md/*.ts", "*.md"],
       processor: "markdown/markdown",
+      extends: ["plugin:markdown/recommended", "eslint:recommended", "plugin:prettier/recommended"],
       rules: {
         "import/order": 0,
         "prettier/prettier": 0,
@@ -45,15 +38,14 @@ module.exports = {
     // svelte
     {
       files: ["*.svelte"],
-      parser: "svelte-eslint-parser",
-      parserOptions: {
-        parser: {
-          // Specify a parser for each lang.
-          ts: "@typescript-eslint/parser",
-          js: "espree",
-          typescript: "@typescript-eslint/parser",
-        },
-      },
+      extends: [
+        "plugin:markdown/recommended",
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:prettier/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
+      ],
+      processor: "svelte3/svelte3",
       rules: {
         "@typescript-eslint/no-floating-promises": 0,
       },
@@ -61,9 +53,15 @@ module.exports = {
     // ts
     {
       files: ["*.ts", "*.tsx"],
-      extends: ["plugin:import/typescript"],
+      extends: [],
+      extends: [
+        "plugin:import/typescript",
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:prettier/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
+      ],
       parserOptions: {
-        project: "./tsconfig.json",
         ecmaFeatures: {
           jsx: true,
         },
@@ -81,11 +79,16 @@ module.exports = {
   parserOptions: {
     ecmaVersion: "latest",
     sourceType: "module",
+    project: "./tsconfig.json",
+    tsconfigRootDir: __dirname,
     extraFileExtensions: [".svelte"],
   },
   // 排除的文件
   ignorePatterns: ["*.demo.svelte"],
   rules: {
     "import/no-cycle": 0,
+  },
+  settings: {
+    "svelte3/typescript": () => require("typescript"),
   },
 };

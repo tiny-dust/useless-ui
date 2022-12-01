@@ -1,21 +1,15 @@
 <script lang="ts">
   import Router from "svelte-spa-router";
   import { ComponentsRoutes } from "../router";
-</script>
+</script>;
 
-  <div class="w-layout">
-    <div class="w-menu">
-      <side />
-    </div>
-    <div class="w-main">
-      <div class="w-header">
-        <header />
-      </div>
-      <div class="w-content">
+<div class="w-layout">
+  <side class="w-menu" />
+  <div class="w-main">
+    <header class="w-header" />
+    <main class="w-content">
       <Router routes={ComponentsRoutes} />
-      </div>
-      <div class="w-footer">
-        <footer />
-      </div>
-    </div>
+    </main>
+    <footer class="w-footer" />
   </div>
+</div>;
