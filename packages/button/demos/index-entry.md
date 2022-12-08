@@ -6,6 +6,7 @@
 
 ```demo
 basic.svelte
+type.svelte
 ```
 
 ## API

@@ -3,9 +3,9 @@
 </markdown>
 
 <template>
-  <w-card>
+  <Card>
     <div slot="title">Card title</div>
     <div slot="content">Card content</div>
     <div slot="footer">Card footer</div>
-  </w-card>
+  </Card>
 </template>

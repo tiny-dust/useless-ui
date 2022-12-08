@@ -1,19 +1,26 @@
-<template>
+<script>import Card from "../../../../packages/card/src/index.svelte";</script><template>
 <div class="enter-x">
 <h1>卡片 Card</h1>
 <p>就是普普通通的卡片啦</p>
 <h2>演示</h2>
-<pre><code class="hljs language-html&lt;markdown&gt;"># 基础使用12312
+<pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">markdown</span>&gt;</span>
+# 基础使用12312
 <span class="hljs-tag">&lt;/<span class="hljs-name">markdown</span>&gt;</span>
 
 <span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">w-card</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Card</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">&quot;title&quot;</span>&gt;</span>Card title<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">&quot;content&quot;</span>&gt;</span>Card content<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">&quot;footer&quot;</span>&gt;</span>Card footer<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">w-card</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Card</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
-</code></pre>
+</code><div class="component-list">
+  <Card>
+    <div slot="title">Card title</div>
+    <div slot="content">Card content</div>
+    <div slot="footer">Card footer</div>
+  </Card>
+</div>,
 <h2>API</h2>
 <table>
 <thead>
