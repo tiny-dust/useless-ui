@@ -2,34 +2,6 @@
   import "../style/index.less";
   let header = "";
   let content = "";
-  let visible = false;
-</script>
-
-<template>
-  <div class="w-card">
-    <div class="w-card-header">
-      {header}
-      {#if !header;<script lang="ts">
-  import "../style/index.less";
-  let header = "";
-  let content = "";
-  let visible = false;
-</script>
-
-<template>
-  <div class="w-card">
-    <div class="w-card-header">
-      {header}
-      {#if !header}
-        <slot name="header" />
-      {/if}
-    </div>
-    <div class="w-card-content">
-      {content;<script lang="ts">
-  import "../style/index.less";
-  let header = "";
-  let content = "";
-  let visible = false;
 </script>
 
 <template>
@@ -42,7 +14,7 @@
     </div>
     <div class="w-card-content">
       {content}
-      {#if !content;}
+      {#if !content}
         <slot name="content" />
       {/if}
     </div>

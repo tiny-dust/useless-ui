@@ -1,9 +1,11 @@
 module.exports = {
+  parser: '@typescript-eslint/parser',
   env: {
     browser: true,
     es2021: true,
     node: true,
   },
+  extends: ['eslint:recommended', 'plugin:svelte3/recommended'],
   plugins: ["svelte3", "@typescript-eslint", "markdown"],
   overrides: [
     {
@@ -16,10 +18,9 @@ module.exports = {
     {
       files: ["**/*.md/*.ts", "*.md"],
       processor: "markdown/markdown",
-      extends: ["plugin:markdown/recommended", "eslint:recommended", "plugin:prettier/recommended"],
+      extends: ["plugin:markdown/recommended", "eslint:recommended"],
       rules: {
         "import/order": 0,
-        "prettier/prettier": 0,
         "@typescript-eslint/consistent-type-definitions": 0,
       },
     },
@@ -37,18 +38,8 @@ module.exports = {
     },
     // svelte
     {
-      files: ["*.svelte"],
-      extends: [
-        "plugin:markdown/recommended",
-        "eslint:recommended",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:prettier/recommended",
-        "plugin:@typescript-eslint/recommended-requiring-type-checking",
-      ],
+      files: ['**/*.svelte'],
       processor: "svelte3/svelte3",
-      rules: {
-        "@typescript-eslint/no-floating-promises": 0,
-      },
     },
     // ts
     {
@@ -58,7 +49,6 @@ module.exports = {
         "plugin:import/typescript",
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
-        "plugin:prettier/recommended",
         "plugin:@typescript-eslint/recommended-requiring-type-checking",
       ],
       parserOptions: {

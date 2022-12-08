@@ -1,8 +1,9 @@
-<template><h1>卡片 Card</h1>
+<template>
+<div class="enter-x">
+<h1>卡片 Card</h1>
 <p>就是普普通通的卡片啦</p>
 <h2>演示</h2>
-<pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">markdown</span>&gt;</span>
-# 基础使用12312
+<pre><code class="hljs language-html&lt;markdown&gt;"># 基础使用12312
 <span class="hljs-tag">&lt;/<span class="hljs-name">markdown</span>&gt;</span>
 
 <span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
@@ -32,4 +33,6 @@
 <td></td>
 </tr>
 </tbody></table>
+
+</div>
 </template>

@@ -3,17 +3,7 @@ const path = require("path");
 const hljs = require("highlight.js");
 const marked = require("marked");
 const { exec } = require("child_process");
-// Override function
-// const renderer = {
-//   code(text) {
-//     console.log("text: ", text);
-//     return `
-//             <template>
-//               ${text}
-//             <template>`;
-//   },
-// };
-// marked.use({ renderer });
+
 marked.setOptions({
   highlight: function (code, lang) {
     const language = hljs.getLanguage(lang) ? lang : "html";
@@ -23,7 +13,7 @@ marked.setOptions({
   pedantic: false,
   gfm: true,
   breaks: true,
-  sanitize: false,
+  sanitize: true,
   smartLists: true,
   smartypants: false,
   headerIds: false,
@@ -49,7 +39,7 @@ const genDemoSvelte = (content, dirPath) => {
     // 读取demo文件内容
     const demoPath = path.resolve(dirPath, fileName);
     const demoContent = fs.readFileSync(demoPath, "utf-8");
-    const highCode = `\`\`\`html \n${demoContent}\`\`\``;
+    const highCode = `\`\`\`html${demoContent}\`\`\``;
     return highCode;
   });
 };
@@ -91,7 +81,7 @@ const genComponent = (dirName = "pages") => {
         if (!fs.existsSync(targetDir)) {
           fs.mkdirSync(targetDir, { recursive: true });
         }
-        fs.writeFileSync(targetFile, `<template>${htmlContent}</template>`, {
+        fs.writeFileSync(targetFile, `<template>\n<div class="enter-x">\n${htmlContent}\n</div>\n</template>`, {
           encoding: "utf-8",
           flag: "w",
         });
