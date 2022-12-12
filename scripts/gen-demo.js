@@ -25,6 +25,7 @@ const packagesDir = path.resolve(__dirname, "../packages");
 const genDemoSvelte = (content, dirPath) => {
   // 获取文件中 ```demo  ``` 之间的内容并去除```demo  ```
   const demoContent = content.match(/```demo(.|\n)*?```/g);
+  const targetFiles = [];
   if (demoContent) {
     targetFiles = demoContent[0]
       .replace(/```demo/g, "")
