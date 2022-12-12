@@ -1,0 +1,54 @@
+{
+  "name": "week-ui",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "pnpm run gen-version && node scripts/gen-demo.js && node scripts -d examples -s dev",
+    "clean": "rm -rf node_modules & cd ./examples & rm -rf node_modules",
+    "lint:fix": "eslint --ext .js,.vue,.svelte,.ts,.tsx --fix .",
+    "gen-version": "node scripts/gen-version",
+    "gen-demo": "node scripts/gen-demo.js",
+    "gen-template": "node scripts/gen-template.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@tsconfig/svelte": "^3.0.0",
+    "@types/marked": "^4.0.7",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "eslint": "^8.28.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-config-standard-with-typescript": "^23.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-markdown": "^3.0.0",
+    "eslint-plugin-n": "^15.5.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-svelte3": "^4.0.0",
+    "highlight.js": "^11.7.0",
+    "lint-staged": "^13.0.4",
+    "marked": "^4.2.3",
+    "minimist": "^1.2.7",
+    "typescript": "^4.6.4"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix"
+    ],
+    "*.ts": [
+      "eslint --fix"
+    ],
+    "*.tsx": [
+      "eslint --fix"
+    ],
+    "*.md": [
+      "eslint --fix"
+    ]
+  },
+  "dependencies": {
+    "svelte": "^3.52.0"
+  }
+}
