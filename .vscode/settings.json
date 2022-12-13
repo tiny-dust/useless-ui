@@ -23,5 +23,8 @@
   "sonarURL": "https://sonarcloud.io",
   "auth": {
     "token": "29a71892e95622bd2caafa18e93c15fbf4cf89af"
-  }
+  },
+  "cSpell.words": [
+    "frontmatter"
+  ]
 }
