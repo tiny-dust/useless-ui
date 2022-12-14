@@ -1,28 +1,28 @@
 ---
 layout: home
-
 hero:
-  name: Week UI
+  name: Useless UI
   text: 可能只有一些比较有趣的组件
-  tagline: 比如一些有趣的按钮
+  tagline: 也就是 没啥用UI库
   image:
-    src: https://avatars.githubusercontent.com/u/118516853?s=400&u=5c4f119589365a8149372e37aca8d3aabc953a58&v=4
+    src: /useless-logo.svg
     alt: VitePress
   actions:
     - theme: brand
-      text: Get Started
+      text: 开 始
       link: /guide/
     - theme: alt
-      text: View on GitHub
-      link: https://github.com/tiny-dust/week-ui
+      text: 源 码
+      link: https://github.com/tiny-dust/useless-ui
 features: 
-  - icon: ⚡️ 
-    title: Vite, The DX that can't be beat 
-    details: Lorem ipsum... 
-  - icon: 🖖 
-    title: Power of Vue meets Markdown 
-    details: Lorem ipsum... 
-  - icon: 🛠️ 
-    title: Simple and minimal, always 
-    details: Lorem ipsum...
+  - icon: 🃏
+    title: 没啥用组件库
+    details: 好像确实平时用不上 
+  - icon: ⚡ 
+    title: vue3的组件库 
+    details: 好像很快的样子
+  - icon: 💡 
+    title: 收集一些有趣的
+    details: 我只是想让它更加的有趣
+
 ---
