@@ -14,6 +14,7 @@ const config = defineConfig({
     [ 'link', { rel: 'icon', href: '/favicon.ico' } ], //浏览器标签页图标
   ],
   lastUpdated: true, //以git提交的时间为更新时间
+
   themeConfig: {
     nav: wyNav, //导航栏配置
     sidebar: wySidebar, //侧边栏配置
@@ -23,6 +24,9 @@ const config = defineConfig({
       prev: '上一篇',
       next: '下一篇'
     },
+    socialLinks: [ //社交链接
+      { icon: 'github', link: 'https://github.com/tiny-dust/useless-ui' },
+    ],
   }
 })
 
