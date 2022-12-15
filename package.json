@@ -1,12 +1,22 @@
 {
-  "name": "week-ui",
+  "name": "useless",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.11.15",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "less": "^4.1.3",
+    "typescript": "^4.9.4",
+    "vite": "^4.0.1",
+    "vue": "^3.2.45"
+  }
 }
