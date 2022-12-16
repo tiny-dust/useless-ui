@@ -1,5 +1,4 @@
 import * as components from './components';
-import version from './version';
 import { create } from './create';
 
 

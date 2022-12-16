@@ -1,5 +1,5 @@
 // vue3.0 项目中的 button 组件
-import { defineComponent, render } from 'vue';
+import { defineComponent } from 'vue';
 
 export const buttonProps = {
   color: String,
