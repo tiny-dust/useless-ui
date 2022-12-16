@@ -1,4 +1,12 @@
 export default [
-  { text: 'Guide', link: '/guide/' },
-  { text: '组件',link: '/components/'}
-]
+  {
+    text: "指南",
+    activeMatch: "^/instructions/",
+    link: "/instructions/install",
+  },
+  {
+    text: "基础组件",
+    activeMatch: "^/components/",
+    link: "/components/button",
+  },
+];

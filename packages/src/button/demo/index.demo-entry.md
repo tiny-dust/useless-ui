@@ -4,8 +4,8 @@
 
 ## 演示
 
-```demo
-basic.vue
+```vue
+<<< ./basic.demo.vue
 ```
 
 ## API
@@ -18,8 +18,8 @@ basic.vue
 
 ### ButtonGroup Props
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
+| 名称     | 类型      | 默认值  | 说明               |
+| -------- | --------- | ------- | ------------------ |
 | vertical | `boolean` | `false` | 组内按钮的排列方式 |
 
 ### Button Slots

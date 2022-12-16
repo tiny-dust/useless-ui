@@ -1,5 +1,6 @@
 // vue3.0 项目中的 button 组件
 import { defineComponent } from 'vue'
+import './style/index.less'
 
 export const buttonProps = {
   color: String,
@@ -17,12 +18,21 @@ const Button = defineComponent({
   name: 'Button',
   props: buttonProps,
   setup (props, { slots }) {
-    console.log('%c [ props ]-20', 'font-size:13px; background:#763461; color:#ba78a5;', props, slots)
+    function handleClick (): void {
+      console.log('click')
+    }
+
+    return {
+      handleClick
+    }
   },
   render () {
-    return <button class="el-button">
-      { this.$slots.default?.() }
-    </button>
+    const { handleClick } = this
+    return (
+      <button class="u-button" onClick={handleClick}>
+        {this.$slots.default?.()}
+      </button>
+    )
   }
 })
 
