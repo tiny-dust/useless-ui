@@ -1,9 +1,5 @@
 {
   "compilerOptions": {
-    "rootDir": ".",
-    "paths": {
-      "useless-ui": ["./packages/src"]
-    },
     "strict": true,
     "strictNullChecks": true,
     "jsx": "preserve",
