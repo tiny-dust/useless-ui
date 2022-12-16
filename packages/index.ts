@@ -1,5 +1,5 @@
-import Button from './src/button/index.vue'
+export * from './components'
+export {default, install} from './preset'
+export { default as create } from './create'
 
-export {
-  Button
-}
+export { default as version } from './version'

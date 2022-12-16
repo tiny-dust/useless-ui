@@ -9,7 +9,7 @@ hero:
     alt: VitePress
   actions:
     - theme: brand
-      text: 开 始
+      text: 快速开始
       link: /guide/
     - theme: alt
       text: 源 码
