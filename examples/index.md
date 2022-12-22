@@ -10,19 +10,18 @@ hero:
   actions:
     - theme: brand
       text: 快速开始
-      link: /guide/
+      link: /instructions/
     - theme: alt
       text: 源 码
       link: https://github.com/tiny-dust/useless-ui
-features: 
+features:
   - icon: 🃏
     title: 没啥用组件库
-    details: 好像确实平时用不上 
-  - icon: ⚡ 
-    title: vue3的组件库 
+    details: 好像确实平时用不上
+  - icon: ⚡
+    title: vue3的组件库
     details: 好像很快的样子
-  - icon: 💡 
+  - icon: 💡
     title: 收集一些有趣的
     details: 我只是想让它更加的有趣
-
 ---
