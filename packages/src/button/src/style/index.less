@@ -1,19 +1,29 @@
-.u-button {
-  width: 120px;
-  height: 120px;
+.relief-button {
+  padding: 4px 12px;
   background: var(--relief-btn-bg);
   color: var(--relief-btn-color);
-  font-size: 18px;
-  border-radius: 8px;
+  font-size: 14px;
+  border-radius: 4px;
   transition: .2s all;
-  box-shadow: 7px 7px 12px var(--relief-btn-shadow),-7px -7px 12px var(--relief-btn-inset-shadow),inset 0 0 0 var(--relief-btn-inset-shadow),inset 0 0 0 var(--relief-btn-shadow);
+  box-shadow: 
+    4px 4px 8px var(--relief-btn-shadow),
+    -4px -4px 8px var(--relief-btn-inset-shadow),
+    inset 0 0 0 var(--relief-btn-inset-shadow),
+    inset 0 0 0 var(--relief-btn-shadow);
 
   &:active {
     box-shadow:
       0 0 0 var(--relief-btn-shadow),
       0 0 0 var(--relief-btn-inset-shadow),
-      inset -7px -7px 12px var(--relief-btn-inset-shadow),
-      inset 7px 7px 12px var(--relief-btn-shadow);
+      inset -4px -4px 8px var(--relief-btn-inset-shadow),
+      inset 4px 4px 8px var(--relief-btn-shadow);
   }
+}
 
+.relief-button--circle {
+  border-radius: 50%;
+  padding: 0;
+  text-align: center;
+  width: 40px;
+  height: 40px;
 }

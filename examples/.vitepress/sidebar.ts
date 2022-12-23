@@ -18,7 +18,7 @@ export default {
     {
       text: "基础组件",
       link: "/components/",
-      items: [{ text: "浮雕按钮", link: "/components/button" }],
+      items: [{ text: "浮雕按钮", link: "/components/relief-button" }],
     },
   ],
 };

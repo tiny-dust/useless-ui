@@ -33,7 +33,7 @@ const lightTheme: Theme = {
   relief: {
     bg: '#e9ecef',
     color: '#333',
-    boxShadow: 'rgba(0, 0, 0, .4)',
+    boxShadow: 'rgba(0, 0, 0, 0.35)',
     insetBoxShadow: '#e9ecef'
   }
 }

@@ -8,7 +8,7 @@
     "url": "git@github.com:handa-wuxi/workbench.git"
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "cd examples && pnpm run docs:dev && cd .. && vite",
     "build": "vite build",
     "preview": "vite preview",
     "commit": "git add . && git-cz",
@@ -16,6 +16,8 @@
     "clean": "rimraf site lib es dist node_modules",
     "gen-version": "node scripts/gen-version",
     "release": "release-it",
+    "test": "vitest",
+    "coverage": "vitest run --coverage",
     "lint": "eslint \"{packages,build,scripts,examples}/**/*.{ts,tsx,js,vue,md}\"",
     "lint:fix": "eslint --fix \"{packages,build,scripts,examples}/**/*.{ts,tsx,js,vue,md}\"",
     "prepare": "husky install"
@@ -26,6 +28,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",
     "@commitlint/config-angular": "^17.3.0",
+    "@types/color": "^3.0.3",
     "@types/node": "^18.11.15",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.46.1",
@@ -55,6 +58,7 @@
     "rimraf": "^3.0.2",
     "typescript": "^4.9.4",
     "vite": "^4.0.1",
+    "vitest": "^0.26.2",
     "vue": "^3.2.45"
   },
   "lint-staged": {
