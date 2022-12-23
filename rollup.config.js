@@ -6,13 +6,17 @@ const babel = require('@rollup/plugin-babel').default
 const replace = require('@rollup/plugin-replace')
 const commonjs = require('@rollup/plugin-commonjs')
 const esbuild = require('rollup-plugin-esbuild').default
+const less = require('rollup-plugin-less')
 const { terser } = require('rollup-plugin-terser')
 
-const extensions = ['.mjs', '.js', '.json', '.ts']
+const extensions = ['.mjs', '.js', '.json', '.ts', '.css', '.less']
 
 const baseConfig = defineConfig({
   input: path.resolve('./packages/index.ts'),
   plugins: [
+    less({
+      output: path.resolve('dist/index.css')
+    }),
     nodeResolve({ extensions }),
     esbuild({
       tsconfig: path.resolve(__dirname, 'tsconfig.esbuild.json'),

@@ -1,13 +1,12 @@
 // vue3.0 项目中的 button 组件
 import { computed, defineComponent } from 'vue'
 import useTheme from '../../../hooks/useTheme'
+import Color from 'color'
 import './style/index.less'
 
 export const buttonProps = {
   color: String,
   textColor: String,
-  text: Boolean,
-  block: Boolean,
   loading: Boolean,
   disabled: Boolean,
   circle: Boolean
@@ -19,28 +18,42 @@ const Button = defineComponent({
   name: 'Button',
   props: buttonProps,
   setup (props, { slots }) {
-    const { theme } = useTheme()
-    function handleClick (): void {}
+    const { theme, isDark } = useTheme()
 
     const reliefStyle = computed(() => {
       const relief = theme.value.relief
+      const insetBoxShadowColor = Color(props.color ?? relief.bg)
+        .alpha(isDark.value ? 0.1 : 0.3)
+        .rgb()
+        .string()
+      const boxShadowColor = Color(relief.boxShadow)
+        .opaquer(isDark.value && props.color ? 0.8 : 0.3)
+        .rgb()
+        .string()
       return {
-        '--relief-btn-bg': relief.bg,
-        '--relief-btn-color': relief.color,
-        '--relief-btn-shadow': relief.boxShadow,
-        '--relief-btn-inset-shadow': relief.insetBoxShadow
+        '--relief-btn-bg': props.color ?? relief.bg,
+        '--relief-btn-color': props.textColor ?? relief.color,
+        '--relief-btn-shadow': boxShadowColor,
+        '--relief-btn-inset-shadow': insetBoxShadowColor
+      }
+    })
+
+    const reliefCss = computed(() => {
+      return {
+        'relief-button': true,
+        'relief-button--circle': props.circle
       }
     })
 
     return {
-      handleClick,
-      reliefStyle
+      reliefStyle,
+      reliefCss
     }
   },
   render () {
-    const { handleClick, reliefStyle } = this
+    const { reliefStyle, reliefCss, $attrs } = this
     return (
-      <button class="u-button" style={reliefStyle} onClick={handleClick}>
+      <button class={reliefCss} style={reliefStyle} {...$attrs}>
         {this.$slots.default?.()}
       </button>
     )

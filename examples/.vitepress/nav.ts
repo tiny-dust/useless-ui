@@ -7,6 +7,6 @@ export default [
   {
     text: "基础组件",
     activeMatch: "^/components/",
-    link: "/components/button",
+    link: "/components/relief-button",
   },
 ];
