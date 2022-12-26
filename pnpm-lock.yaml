@@ -102,7 +102,11 @@ importers:
 
   packages:
 
-    specifiers: {}
+    specifiers:
+      '@types/color': ^3.0.3
+
+    devDependencies:
+      '@types/color': 3.0.3
 
 packages:
 
@@ -1523,7 +1527,7 @@ packages:
       vite: ^4.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 4.0.1_p2e7be343i2iab65kyde7hr34m
+      vite: 4.0.1
       vue: 3.2.45
     dev: true
 

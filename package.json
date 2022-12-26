@@ -1,12 +1,15 @@
 {
-  "name": "useless",
-  "version": "0.0.1",
-  "description": "",
-  "main": "dist/index.prod.js",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:handa-wuxi/workbench.git"
-  },
+  "name": "@useless-design/ui",
+  "version": "0.0.3",
+  "description": "一个可能没啥用的vue3组件库",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "unpkg": "dist/index.js",
+  "jsdelivr": "dist/index.js",
+  "files": [
+    "dist/*"
+  ],
   "scripts": {
     "dev": "cd examples && pnpm run docs:dev && cd .. && vite",
     "build": "rollup -c",
@@ -22,8 +25,6 @@
     "lint:fix": "eslint --fix \"{packages,build,scripts,examples}/**/*.{ts,tsx,js,vue,md}\"",
     "prepare": "husky install"
   },
-  "keywords": [],
-  "author": "",
   "license": "ISC",
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",
@@ -68,6 +69,23 @@
     "vitest": "^0.26.2",
     "vue": "^3.2.45"
   },
+  "author": "tiny-dust",
+  "homepage": "https://useless-design.vercel.app",
+  "repository": {
+    "type": "git",
+    "directory": "packages/vue3",
+    "url": "git@github.com:tiny-dust/useless-ui.git"
+  },
+  "keywords": [
+    "vue3",
+    "vue3组件库",
+    "vue3 ui",
+    "useless ui",
+    "useless design",
+    "useless design ui",
+    "useless design vue3",
+    "useless design vue3 ui"
+  ],
   "lint-staged": {
     "*.js": [
       "prettier --write",
@@ -104,9 +122,12 @@
       "prepare-commit-msg": "exec < /dev/tty && npx cz --hook || true"
     }
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "release-it": {
     "hooks": {
-      "after:bump": "npm run changelog",
+      "after:bump": "npx release-it --changelog",
       "before:release": "echo 🚨 提醒：现在将 Github 中的默认分支更新为这个发布分支！",
       "after:release": "echo 🎊 成功发布 ${name} v${version} 到 ${ repo.repository}。"
     },
@@ -114,9 +135,8 @@
       "requireCleanWorkingDir": false,
       "requireBranch": "main",
       "tagName": "v${version}",
-      "commitMessage": "🔖 chore(release): v${version}",
-      "tagAnnotation": "v${version}",
-      "changelog": "npm run changelog"
+      "commitMessage": "chore(release): v${version}",
+      "tagAnnotation": "v${version}"
     },
     "npm": {
       "publish": true
