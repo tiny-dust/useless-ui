@@ -1,5 +1,6 @@
 import createVuePlugin from '@vitejs/plugin-vue'
 import Inspect from 'vite-plugin-inspect'
+import mdToVue from './md-to-vue'
 
 const vuePlugin = createVuePlugin({
   include: [/\.vue$/, /\.md$/]
@@ -12,16 +13,11 @@ const createVitePlugin = () => {
     name: 'vite-plugin-md',
     transform (code, id) {
       if (fileRegex.test(id)) {
-        return ''
+        return mdToVue(id)
       }
     },
     async handleHotUpdate ({ file, server }) {
-      console.log(
-        '%c [ file, server ]-20',
-        'font-size:13px; background:#90189b; color:#d45cdf;',
-        file,
-        server
-      )
+      console.log(file, server)
     }
   }
   return [mdPlugin, vuePlugin, Inspect()]

@@ -5,7 +5,7 @@
 ## 演示
 
 ```vue
-<<< ./basic.demo.vue
+basic.vue
 ```
 
 ## API
