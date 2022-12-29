@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
   extends: ['plugin:markdown/recommended', 'prettier'],
   overrides: [
@@ -34,7 +36,7 @@ module.exports = {
       files: ['*.ts', '*.tsx'],
       extends: ['standard-with-typescript', 'plugin:import/typescript'],
       parserOptions: {
-        project: './tsconfig.json',
+        project: path.join(__dirname, './tsconfig.json'),
         ecmaFeatures: {
           jsx: true
         }

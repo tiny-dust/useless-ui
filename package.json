@@ -40,7 +40,6 @@
     "@vitejs/plugin-vue": "^4.0.0",
     "@vue/eslint-config-standard": "^8.0.1",
     "@vue/eslint-config-typescript": "^11.0.2",
-    "color": "^4.2.3",
     "commitizen": "^4.2.6",
     "commitlint": "^17.3.0",
     "cz-conventional-changelog": "^3.3.0",

@@ -1,7 +1,7 @@
 // vue3.0 项目中的 button 组件
 import { computed, defineComponent } from 'vue'
 import useTheme from '../../../hooks/useTheme'
-import Color from 'color'
+import { alpha } from '../../../utils/color'
 import './style/index.less'
 
 export const buttonProps = {
@@ -19,17 +19,18 @@ const Button = defineComponent({
   props: buttonProps,
   setup (props, { slots }) {
     const { theme, isDark } = useTheme()
-
     const reliefStyle = computed(() => {
       const relief = theme.value.relief
-      const insetBoxShadowColor = Color(props.color ?? relief.bg)
-        .alpha(isDark.value ? 0.1 : 0.3)
-        .rgb()
-        .string()
-      const boxShadowColor = Color(relief.boxShadow)
-        .opaquer(isDark.value && props.color ? 0.8 : 0.3)
-        .rgb()
-        .string()
+      const insetBoxShadowColor = alpha(
+        props.color ?? relief.bg,
+        isDark.value ? 0.1 : 0.3
+      )
+
+      const boxShadowColor = alpha(
+        relief.boxShadow,
+        isDark.value && props.color ? 0.8 : 0.3
+      )
+
       return {
         '--relief-btn-bg': props.color ?? relief.bg,
         '--relief-btn-color': props.textColor ?? relief.color,

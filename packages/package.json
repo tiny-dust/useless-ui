@@ -8,8 +8,5 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@types/color": "^3.0.3"
-  }
+  "license": "ISC"
 }
