@@ -4,7 +4,7 @@
 
 ## 演示
 
-```vue
+```demo
 basic.vue
 ```
 
@@ -33,3 +33,7 @@ basic.vue
 | 名称    | 参数 | 说明         |
 | ------- | ---- | ------------ |
 | default | `()` | 按钮组的内容 |
+
+```component
+NButton,NCard: import { Button, NCard } from 'naive-ui'
+```
