@@ -1,9 +1,5 @@
 @import "Metropolis.css";
-
-#app {
-  height: 100vh;
-  overflow: auto;
-}
+@import "common.css";
 
 body {
   overflow: hidden;

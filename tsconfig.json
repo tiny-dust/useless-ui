@@ -2,7 +2,7 @@
   "compilerOptions": {
     "rootDir": ".",
     "paths": {
-      "useless-ui": ["./packages/src"]
+      "@useless-design/ui": ["./packages/src"]
     },
     "strict": true,
     "strictNullChecks": true,

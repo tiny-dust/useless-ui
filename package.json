@@ -13,6 +13,7 @@
   "scripts": {
     "dev": "vite",
     "build": "rollup -c",
+    "build:site": "vite build",
     "preview": "vite preview",
     "commit": "git add . && git-cz",
     "build:packages": "pnpm run clean && pnpm run gen-version && rollup -c",

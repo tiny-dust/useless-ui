@@ -30,7 +30,6 @@ function createRender (wrapCodeWithCard = true) {
     },
 
     code: (code, language) => {
-      console.log(code, language)
       if (language.startsWith('__')) {
         language = language.replace('__', '')
       }

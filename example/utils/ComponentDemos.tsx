@@ -10,7 +10,6 @@ export default defineComponent({
     }
   },
   setup (props) {
-    console.log('13-「ComponentDemos」', props)
     const isMobileRef = useIsMobile()
     const isTabletRef = useIsTablet()
     const isSmallDesktop = useIsSmallDesktop()
