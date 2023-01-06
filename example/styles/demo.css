@@ -1,5 +1,10 @@
 @import "Metropolis.css";
 
+#app {
+  height: 100vh;
+  overflow: auto;
+}
+
 body {
   overflow: hidden;
   --header-height: 64px;

@@ -1,74 +1,95 @@
-import { marked } from 'marked'
+const hljs = require('highlight.js')
+const { marked } = require('marked')
 
-const resolveDemoInfos = (code, relativeDir, env) => {}
+function createRender (wrapCodeWithCard = true) {
+  const renderer = new marked.Renderer()
+  const overrides = {
+    table (header, body) {
+      if (body) body = '<tbody>' + body + '</tbody>'
+      return (
+        '<div class="md-table-wrapper"><n-table single-column class="md-table">\n' +
+        '<thead>\n' +
+        header +
+        '</thead>\n' +
+        body +
+        '</n-table>\n' +
+        '</div>'
+      )
+    },
 
-const genDemosTemplate = (demosInfos, colSpan) => {}
+    tablerow (content) {
+      return '<tr>\n' + content + '</tr>\n'
+    },
 
-const mdToDoc = (code, relativeDir, env = 'development') => {
-  const colSpan = ~code.search('<!--single-column-->') ? 1 : 2
-  const hasApi = !!~code.search('## API')
-  console.log('13-「md-render」', hasApi)
+    tablecell (content, flags) {
+      const type = flags.header ? 'th' : 'td'
+      const tag = flags.align
+        ? '<' + type + ' align="' + flags.align + '">'
+        : '<' + type + '>'
+      return tag + content + '</' + type + '>\n'
+    },
 
-  // 解析md 详情请看文档 https://marked.js.org/using_pro#lexer
-  const mdLayer = marked.lexer(code)
-  // 获取组件的代码  比如md文件中引入了一些第三方的组件  就使用这里的代码
-  const componentsIndex = mdLayer.findIndex(
-    (item) => item.type === 'code' && item.lang === 'component'
-  )
-  let components = []
-  if (~componentsIndex) {
-    // mdLayer[componentsIndex].text : NButton: import { Button } from 'naive-ui'
-    components = mdLayer[componentsIndex].text
-      .split('\n')
-      .map((component) => {
-        console.log('23-「md-render」', components)
-        const [compName, importCode] = component.split(':')
-        if (!compName.trim()) throw new Error('没有组件名')
-        if (!importCode.trim()) throw new Error('没有组件资源地址')
-        return {
-          compName: compName.split(',').map((item) => item.trim()),
-          importCode
-        }
-      })
-      .filter(({ compName, importCode }) => compName && importCode) // 过滤掉空的
+    code: (code, language) => {
+      console.log(code, language)
+      if (language.startsWith('__')) {
+        language = language.replace('__', '')
+      }
+      const isLanguageValid = !!(language && hljs.getLanguage(language))
+      if (!isLanguageValid) {
+        throw new Error(
+          `MdRendererError: ${language} is not valid for code - ${code}`
+        )
+      }
+      const highlighted = hljs.highlight(code, { language }).value
+      const content = `<n-code><pre v-pre>${highlighted}</pre></n-code>`
+      return wrapCodeWithCard
+        ? `<n-card embedded :bordered="false" class="md-card" content-style="padding: 0;">
+            <n-scrollbar x-scrollable content-style="padding: 16px;">
+              ${content}
+            </n-scrollbar>
+          </n-card>`
+        : content
+    },
+    heading: (text, level) => {
+      const id = text.replace(/ /g, '-')
+      return `<n-h${level} id="${id}">${text}</n-h${level}>`
+    },
+    blockquote: (quote) => {
+      return `<n-blockquote>${quote}</n-blockquote>`
+    },
+    hr: () => '<n-hr />',
+    paragraph: (text) => {
+      return `<n-p>${text}</n-p>`
+    },
+    link (href, title, text) {
+      if (/^(http:|https:)/.test(href)) {
+        return `<n-a href="${href}" target="_blank">${text}</n-a>`
+      }
+      return `<router-link to="${href}" #="{ navigate, href }" custom><n-a :href="href" @click="navigate">${text}</n-a></router-link>`
+    },
+    list (body, ordered, start) {
+      const type = ordered ? 'n-ol' : 'n-ul'
+      const startatt = ordered && start !== 1 ? ' start="' + start + '"' : ''
+      return `<${type}${startatt}>\n` + body + `</${type}>\n`
+    },
+    listitem (text) {
+      return `<n-li>${text}</n-li>`
+    },
+    codespan (code) {
+      return `<n-text code>${code}</n-text>`
+    },
+    strong (text) {
+      return `<n-text strong>${text}</n-text>`
+    },
+    checkbox (checked) {
+      return `<n-checkbox :checked="${checked}" style="vertical-align: -2px; margin-right: 8px;" />`
+    }
   }
 
-  // 处理标题  并添加在github中编辑的功能
-  const titleIndex = mdLayer.findIndex(
-    (item) => item.type === 'heading' && item.depth === 1
-  )
-  if (~titleIndex) {
-    const title = mdLayer[titleIndex].text
-    const btnTemplate = `<edit-on-github-header relative-url="${relativeDir}" text=${title}></edit-on-github-header>`
-    mdLayer.splice(titleIndex, 1, {
-      type: 'html',
-      pre: false,
-      text: btnTemplate
-    })
-  }
-
-  // 处理demo 并移除在生产中的打包构建
-  const demoIndex = mdLayer.findIndex(
-    (item) => item.type === 'code' && item.lang === 'demo'
-  )
-  let demoInfos = []
-  if (~demoIndex) {
-    demoInfos = resolveDemoInfos(code, relativeDir, env)
-    console.log('45-「md-render」', demoInfos)
-    mdLayer.splice(demoIndex, 1, {
-      type: 'html',
-      pre: false,
-      text: genDemosTemplate(demoInfos, colSpan)
-    })
-  }
-
-  return `
-    <template>
-      <div class="doc">
-        hello world
-      </div>
-    </template>
-  `
+  Object.keys(overrides).forEach((key) => {
+    renderer[key] = overrides[key]
+  })
+  return renderer
 }
 
-export default mdToDoc
+export default createRender

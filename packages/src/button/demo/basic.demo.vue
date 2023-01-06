@@ -4,5 +4,15 @@
 </markdown>
 
 <template>
-  <UButton>浮雕按钮</UButton>
+  <UButton><CashIcon />浮雕按钮</UButton>
 </template>
+<script lang="ts">
+import { CashOutline as CashIcon } from '@vicons/ionicons5'
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  components: {
+    CashIcon
+  }
+})
+</script>

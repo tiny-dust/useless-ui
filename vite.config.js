@@ -10,11 +10,33 @@ export default defineConfig({
       process.env.NODE_ENV !== 'production'
         ? [
             {
-              find: '@useless/ui',
+              find: '@useless-design/ui',
               replacement: path.resolve(__dirname, './packages')
             }
           ]
         : undefined
+  },
+  define: {
+    'process.env.NODE_ENV': `'${process.env.NODE_ENV}'`,
+    __DEV__: process.env.NODE_ENV !== 'production'
+  },
+  optimizeDeps: {
+    include: [
+      'highlight.js',
+      'vooks',
+      'vue',
+      'vue-router',
+      'codesandbox/lib/api/define',
+      'highlight.js/lib/core',
+      'highlight.js/lib/languages/javascript',
+      'highlight.js/lib/languages/python',
+      'highlight.js/lib/languages/cpp',
+      'highlight.js/lib/languages/xml',
+      '@vicons/ionicons5',
+      '@vicons/ionicons4',
+      '@vicons/fluent/Compose16Regular.js'
+    ],
+    exclude: ['__INDEX__']
   },
   test: {
     coverage: {

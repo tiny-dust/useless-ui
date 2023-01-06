@@ -1,3 +1,4 @@
+import { App } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import routes from './routes'
 
@@ -6,7 +7,7 @@ const router = createRouter({
   routes
 })
 
-const setupRouter = (app) => {
+const setupRouter = (app: App): void => {
   app.use(router)
 }
 

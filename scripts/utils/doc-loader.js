@@ -1,4 +1,4 @@
-import mdToDoc from './md-render'
+import mdToDoc from './md-to-doc'
 import projectPath from './project-path'
 
 const docLoader = (code, path) => {
