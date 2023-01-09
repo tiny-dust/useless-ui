@@ -24,32 +24,34 @@ const mergeParts = ({ parts, isVue }) => {
 }
 
 // 获取demo.vue文件中的template、script、style、markdown等数据
-const getPartsOfDemo = (code) => {
-  // 获取vue文件中的template、script、style、markdown  markdown是非常规标签，所以需要marked解析
-  const template = code.match(/<template>([\s\S]*)<\/template>/)?.[1]?.trim()
-  const script = code.match(/<script.*?>([\s\S]*)<\/script>/)?.[1]?.trim()
-  const style = code.match(/<style>([\s\S]*)<\/style>/)?.[1]?.trim()
-  const markdownText = code
-    .match(/<markdown>([\s\S]*)<\/markdown>/)?.[1]
+function getPartsOfDemo (text) {
+  // slot template
+  const firstIndex = text.indexOf('<template>')
+  let template = text.slice(firstIndex + 10)
+  const lastIndex = template.lastIndexOf('</template>')
+  template = template.slice(0, lastIndex)
+  const script = text.match(/<script.*?>([\s\S]*?)<\/script>/)?.[1]?.trim()
+  const style = text.match(/<style>([\s\S]*?)<\/style>/)?.[1]
+  const markdownText = text
+    .match(/<markdown>([\s\S]*?)<\/markdown>/)?.[1]
     ?.trim()
-  const mdLayer = marked.lexer(markdownText)
-  const contents = []
+  const tokens = marked.lexer(markdownText)
+  const contentTokens = []
   let title = ''
-  for (const md of mdLayer) {
-    if (md.type === 'heading' && md.depth === 1) {
-      title = md.text
+  for (const token of tokens) {
+    if (token.type === 'heading' && token.depth === 1) {
+      title = token.text
     } else {
-      contents.push(md)
+      contentTokens.push(token)
     }
   }
-  // 获取vue文件中的script标签中的lang属性
-  const languageType = code.includes('lang="ts"') ? 'ts' : 'js'
+  const languageType = text.includes('lang="ts"') ? 'ts' : 'js'
   return {
     template,
     script,
     style,
     title,
-    content: marked.parser(contents, {
+    content: marked.parser(contentTokens, {
       renderer: mdRenderer
     }),
     language: languageType

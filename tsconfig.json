@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
-    "rootDir": ".",
     "paths": {
-      "@useless-design/ui": ["./packages/src"]
+      "useless-ui": ["./packages/index.ts"],
+      "useless-ui/hooks": ["./packages/hooks.ts"],
     },
+    "outDir":"./",
     "strict": true,
     "strictNullChecks": true,
     "jsx": "preserve",
@@ -21,5 +22,5 @@
     "esModuleInterop": true,
     "lib": ["ESNext", "DOM"]
   },
-  "include": ["packages/src/**/*", "example/**/*"],
+  "exclude": ["node_modules","dist"]
 }

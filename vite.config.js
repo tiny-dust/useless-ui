@@ -10,8 +10,12 @@ export default defineConfig({
       process.env.NODE_ENV !== 'production'
         ? [
             {
-              find: '@useless-design/ui',
+              find: 'useless-ui',
               replacement: path.resolve(__dirname, './packages')
+            },
+            {
+              find: 'useless-ui/hooks',
+              replacement: path.resolve(__dirname, './packages/hooks.ts')
             }
           ]
         : undefined

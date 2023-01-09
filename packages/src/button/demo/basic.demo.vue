@@ -16,3 +16,8 @@ export default defineComponent({
   }
 })
 </script>
+<style>
+.demo {
+  position: relative;
+}
+</style>

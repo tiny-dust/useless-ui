@@ -66,15 +66,15 @@ function genAnchorTemplate (
 const genDemosAnchorTemplate = (demoInfos, hasApi, mdLayer) => {
   // 如果有api，就将api的锚点放在最后 否则就放在第一个
   const links = // 将demos的锚点和md文档中的h3标签的锚点合并
-  (
-    hasApi ? demoInfos.concat(genDemosApiAnchorTemplate(mdLayer)) : demoInfos
-  ).map(
-    ({ id, title, debug }) => `<n-anchor-link
+    (
+      hasApi ? demoInfos.concat(genDemosApiAnchorTemplate(mdLayer)) : demoInfos
+    ).map(
+      ({ id, title, debug }) => `<n-anchor-link
       v-if="(displayMode === 'debug') || ${!debug}"
       title="${title}"
       href="#${id}"
     />`
-  )
+    )
 
   return genAnchorTemplate(links.join('\n'), {
     ignoreGap: hasApi
@@ -146,7 +146,7 @@ const genDemosTemplate = (demosInfos, colSpan) => {
  * @param {*} forceShowAnchor 是否显示锚点
  */
 const genDocScript = (demoInfos, components, relativeDir, forceShowAnchor) => {
-  const showAnchor = demoInfos.length > 1 || forceShowAnchor
+  const showAnchor = !!(demoInfos.length || forceShowAnchor)
   // 生成import语句
   const importStmts = demoInfos
     .map(({ variable, fileName }) => {
@@ -185,7 +185,7 @@ const genDocScript = (demoInfos, components, relativeDir, forceShowAnchor) => {
 
 const mdToDoc = async (code, relativeDir, env = 'development') => {
   const colSpan = ~code.search('<!--single-column-->') ? 1 : 2
-  const forceShowAnchor = ~code.search('<!--anchor:on-->')
+  const forceShowAnchor = !!~code.search('<!--anchor:on-->')
   const hasApi = !!~code.search('## API')
 
   // 解析md 详情请看文档 https://marked.js.org/using_pro#lexer
@@ -247,6 +247,7 @@ const mdToDoc = async (code, relativeDir, env = 'development') => {
     renderer: mdRenderer,
     gfm: true
   })
+  console.log(genDemosAnchorTemplate(demoInfos, hasApi, mdLayer))
   // 生成文档的模板
   const docTemplate = `
     <template>

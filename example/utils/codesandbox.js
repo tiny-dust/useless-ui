@@ -41,7 +41,7 @@ components: {
 
 const mainJs = `import { createApp } from "vue";
 import naive from "naive-ui";
-import useless from "@useless-design/ui";
+import useless from "useless-ui";
 import App from "./App.vue";
 
 const app = createApp(App);

@@ -14,6 +14,7 @@ import {
   NMessageProvider,
   NDialogProvider,
   NNotificationProvider,
+  NConfigProvider,
   NButton,
   NTab,
   NCode,
@@ -21,7 +22,14 @@ import {
   NScrollbar,
   NIcon,
   NTooltip,
-  NTabs
+  NTabs,
+  NLayout,
+  NLayoutContent,
+  NLayoutFooter,
+  NLayoutHeader,
+  NLayoutSider,
+  NMenu,
+  NDivider
 } from 'naive-ui'
 import { App } from 'vue'
 
@@ -43,9 +51,17 @@ const naive = create({
     NIcon,
     NTooltip,
     NTabs,
+    NMenu,
+    NDivider,
+    NLayout,
+    NLayoutHeader,
+    NLayoutSider,
+    NLayoutContent,
+    NLayoutFooter,
     NLoadingBarProvider,
     NMessageProvider,
     NDialogProvider,
+    NConfigProvider,
     NNotificationProvider
   ]
 })

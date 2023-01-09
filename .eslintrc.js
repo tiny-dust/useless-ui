@@ -2,6 +2,9 @@ const path = require('path')
 
 module.exports = {
   extends: ['plugin:markdown/recommended', 'prettier'],
+  parserOptions: {
+    project: ['./tsconfig.json', './commitlint.config.js']
+  },
   overrides: [
     {
       files: '*.vue',
@@ -44,6 +47,7 @@ module.exports = {
       rules: {
         '@typescript-eslint/strict-boolean-expressions': 0,
         '@typescript-eslint/prefer-nullish-coalescing': 0,
+        '@typescript-eslint/explicit-function-return-type': 0,
         '@typescript-eslint/naming-convention': 0,
         'multiline-ternary': 0,
         'no-void': 0,

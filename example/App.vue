@@ -1,9 +1,17 @@
 <script setup lang="ts"></script>
 
 <template>
-  <n-message-provider>
-    <router-view />
-  </n-message-provider>
+  <n-config-provider
+    class="demo"
+    namespace="naive-ui-doc"
+    preflight-style-disabled
+    :hljs="hljs"
+  >
+    <n-message-provider>
+      <router-view />
+    </n-message-provider>
+  </n-config-provider>
 </template>
-
-<style scoped></style>
+<script setup lang="ts">
+import hljs from './utils/hljs.js'
+</script>

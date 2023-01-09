@@ -13,14 +13,12 @@ function handleMergeCode ({ parts, mergedParts, isVue }) {
         mergedParts.tsCode += '\n\n'
         mergedParts.jsCode += '\n\n'
       }
-      mergedParts.tsCode += `
-      <script lang="ts">
-        ${parts.script}
-      </script>`
-      mergedParts.jsCode += `
-      <script>
-        ${tsToJs(parts.script)}
-      </script>`
+      mergedParts.tsCode += `<script lang="ts">
+${parts.script}
+</script>`
+      mergedParts.jsCode += `<script>
+${tsToJs(parts.script)}
+</script>`
     }
     if (parts.style) {
       if (parts.template || parts.script) {
@@ -45,10 +43,9 @@ function handleMergeCode ({ parts, mergedParts, isVue }) {
       if (parts.template) {
         mergedParts.jsCode += '\n\n'
       }
-      mergedParts.jsCode += `
-      <script>
-        ${parts.script}
-      </script>`
+      mergedParts.jsCode += `<script>
+${parts.script}
+</script>`
     }
     if (parts.style) {
       if (parts.template || parts.script) {
@@ -56,10 +53,9 @@ function handleMergeCode ({ parts, mergedParts, isVue }) {
       }
       const style = isVue
         ? `<style scoped>${parts.style}</style>`
-        : `
-        <style scoped>
-          ${parts.style}
-        </style>`
+        : `<style scoped>
+${parts.style}
+</style>`
       mergedParts.jsCode += style
     }
   }

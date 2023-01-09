@@ -29,9 +29,11 @@
     "frontmatter",
     "Github",
     "ionicons",
+    "sider",
     "tranform",
     "vicons",
-    "vitepress"
+    "vitepress",
+    "wifi"
   ],
   "svg.preview.background": "transparent"
 }
