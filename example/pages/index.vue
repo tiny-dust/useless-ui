@@ -8,10 +8,8 @@
     <n-layout :native-scrollbar="false" style="top: 64px">
       <h1>主页</h1>
     </n-layout>
-    <SiteFooter />
   </n-layout>
 </template>
 <script setup lang="ts">
 import SiteHeader from '../layout/SiteHeader.vue'
-import SiteFooter from '../layout/SiteFooter.vue'
 </script>

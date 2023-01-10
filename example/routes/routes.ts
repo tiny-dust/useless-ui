@@ -4,6 +4,12 @@ const componentRoutes = [
     name: 'relief-button',
     component: async () =>
       await import('../../packages/src/button/demo/index.demo-entry.md')
+  },
+  {
+    path: 'clock',
+    name: 'clock',
+    component: async () =>
+      await import('../../packages/src/clock/demo/index.demo-entry.md')
   }
 ]
 

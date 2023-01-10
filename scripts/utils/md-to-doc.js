@@ -247,7 +247,6 @@ const mdToDoc = async (code, relativeDir, env = 'development') => {
     renderer: mdRenderer,
     gfm: true
   })
-  console.log(genDemosAnchorTemplate(demoInfos, hasApi, mdLayer))
   // 生成文档的模板
   const docTemplate = `
     <template>

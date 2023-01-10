@@ -28,6 +28,7 @@
   },
   "license": "ISC",
   "dependencies": {
+    "date-fns": "^2.29.3",
     "highlight.js": "^11.7.0",
     "pinia": "^2.0.28",
     "vooks": "^0.2.12"

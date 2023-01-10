@@ -67,7 +67,7 @@ function createItems (lang, theme, prefix, items) {
 export function createComponentMenuOptions ({ lang, theme, mode }) {
   return createItems(lang, theme, '/components', [
     appendCounts({
-      zh: '通用组件',
+      zh: '拟态组件',
       en: 'Common Components',
       type: 'group',
       children: [
@@ -76,6 +76,12 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           zh: '按钮',
           enSuffix: true,
           path: '/relief-button'
+        },
+        {
+          en: 'Clock',
+          zh: '时钟',
+          enSuffix: true,
+          path: '/clock'
         }
       ]
     })
