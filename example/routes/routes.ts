@@ -16,12 +16,12 @@ const componentRoutes = [
 const routes = [
   {
     name: 'home',
-    path: '/',
+    path: '/:lang',
     component: async () => await import('../pages/index.vue')
   },
   {
     name: 'components',
-    path: '/components',
+    path: '/:lang/components',
     component: async () => await import('../layout/BasicLayout.vue'),
     children: componentRoutes
   },
@@ -31,7 +31,7 @@ const routes = [
     redirect: {
       name: 'home',
       params: {
-        lang: navigator.language === 'zh-CN' ? 'zh-CN' : 'en-US',
+        lang: navigator.language,
         theme: 'os-theme'
       }
     }

@@ -20,6 +20,18 @@ const cameLCase = (str) => {
     })
 }
 
+const langOptions = (str, key, options) => {
+  const target = { ...options }
+  str.split(',').forEach((item) => {
+    const [lang, value] = item.split(':')
+    target[lang.trim()] = {
+      ...target[lang],
+      [key]: value
+    }
+  })
+  return target
+}
+
 // 生成锚点
 const genDemosApiAnchorTemplate = (mdLayer) => {
   const api = [
@@ -71,7 +83,7 @@ const genDemosAnchorTemplate = (demoInfos, hasApi, mdLayer) => {
     ).map(
       ({ id, title, debug }) => `<n-anchor-link
       v-if="(displayMode === 'debug') || ${!debug}"
-      title="${title}"
+      ${title.includes("t('") ? ':' : ''}title="${title}"
       href="#${id}"
     />`
     )
@@ -88,23 +100,38 @@ const genPageAnchorTemplate = (mdLayer) => {
     .map((md) => md.title)
   // 将标题转换成锚点
   const links = titles.map((title, index) => {
+    const hasLocale = title.includes("t('")
     const href = title.replace(/ /g, '-')
-    return `<n-anchor-link title="${title}" href="#${href}" />`
+    return `<n-anchor-link ${
+      hasLocale ? ':' : ''
+    }title="${title}" href="#${href}" />`
   })
   return genAnchorTemplate(links.join('\n'), { ignoreGap: true })
 }
 
 // 获取每个demo.vue中  <markdown> 标签中的 # xxx  作为demo的标题
-const resolveDemoTitle = async (fileName, relativeDir) => {
+const resolveDemoTitle = async (fileName, relativeDir, langs) => {
+  const prefix = fileName.replace(/\.demo.vue$/, '')
   const demoStr = await fse.readFile(
     path.resolve(projectPath, relativeDir, '..', fileName),
     'utf-8'
   )
-  return demoStr.match(/# ([^\n]+)/)[1]
+  // 获取文件中所有带有lang属性的<markdown>标签并处理成数组
+  const mdStr = demoStr.match(/<markdown lang="(.+?)">([\s\S]+?)<\/markdown>/g)
+  if (!mdStr) return ''
+  // 循环处理每一个<markdown>标签  并浅拷贝到langs中
+  mdStr.forEach((item) => {
+    const lang = item.match(/<markdown lang="(.+?)">/)[1]
+    langs[lang] = {
+      ...langs[lang],
+      [prefix + '-title']: item.match(/# ([^\n]+)/)[1]
+    }
+  })
+  return `t('${prefix}-title')`
 }
 
 // 处理每一个demo.vue文件  将其转换成组件 比如 basic.demo.vue  转换成 <BasicDemo />
-const resolveDemoInfos = async (demoInfos, relativeDir, env) => {
+const resolveDemoInfos = async (demoInfos, relativeDir, env, langs) => {
   const demoStr = demoInfos
     .split('\n')
     .map((item) => item.trim())
@@ -125,7 +152,7 @@ const resolveDemoInfos = async (demoInfos, relativeDir, env) => {
       id: demo,
       variable: componentName,
       fileName,
-      title: await resolveDemoTitle(fileName, relativeDir),
+      title: await resolveDemoTitle(fileName, relativeDir, langs),
       tag: `<${componentName} />`,
       debug
     })
@@ -145,7 +172,13 @@ const genDemosTemplate = (demosInfos, colSpan) => {
  * @param {*} relativeDir 所在的相对路径
  * @param {*} forceShowAnchor 是否显示锚点
  */
-const genDocScript = (demoInfos, components, relativeDir, forceShowAnchor) => {
+const genDocScript = (
+  demoInfos,
+  components,
+  relativeDir,
+  forceShowAnchor,
+  langs
+) => {
   const showAnchor = !!(demoInfos.length || forceShowAnchor)
   // 生成import语句
   const importStmts = demoInfos
@@ -154,6 +187,7 @@ const genDocScript = (demoInfos, components, relativeDir, forceShowAnchor) => {
     })
     .concat(components.map(({ importStmts }) => importStmts))
     .join('\n')
+
   // 生成components语句
   // const componentsStmts = demoInfos.map(({ variable }) => {
   //   return `${variable}`
@@ -164,7 +198,8 @@ const genDocScript = (demoInfos, components, relativeDir, forceShowAnchor) => {
     import { computed } from 'vue'
     import { useMemo } from 'vooks'
     import { useIsMobile } from '/example/utils/composables'
-
+    import { i18n } from '/example/utils/composables'
+    const { t, locale } = i18n(${JSON.stringify(langs)})
     const isMobileRef = useIsMobile()
     const showAnchor = useMemo(() => {
       if (isMobileRef.value) return false
@@ -178,7 +213,7 @@ const genDocScript = (demoInfos, components, relativeDir, forceShowAnchor) => {
             : 'padding: 16px 16px 24px 16px;'
     })
     const contentStyle = 'width: calc(100% - 228px); margin-right: 36px;'
-    const  url = ${JSON.stringify(relativeDir)}
+    const url = ${JSON.stringify(relativeDir)}
   </script>`
   return script
 }
@@ -187,9 +222,11 @@ const mdToDoc = async (code, relativeDir, env = 'development') => {
   const colSpan = ~code.search('<!--single-column-->') ? 1 : 2
   const forceShowAnchor = !!~code.search('<!--anchor:on-->')
   const hasApi = !!~code.search('## API')
+  let langs = {}
 
   // 解析md 详情请看文档 https://marked.js.org/using_pro#lexer
   const mdLayer = marked.lexer(code)
+
   // 获取组件的代码  比如md文件中引入了一些第三方的组件  就使用这里的代码
   const componentsIndex = mdLayer.findIndex(
     (item) => item.type === 'code' && item.lang === 'component'
@@ -217,7 +254,9 @@ const mdToDoc = async (code, relativeDir, env = 'development') => {
   )
   if (~titleIndex) {
     const title = mdLayer[titleIndex].text
-    const btnTemplate = `<edit-on-github-header relative-url="${relativeDir}" text=${title}></edit-on-github-header>`
+    langs = langOptions(title, 'title', langs)
+    const btnTemplate =
+      '<edit-on-github-header :relative-url="url" :text="t(\'title\')"></edit-on-github-header>'
     mdLayer.splice(titleIndex, 1, {
       type: 'html',
       pre: false,
@@ -234,7 +273,8 @@ const mdToDoc = async (code, relativeDir, env = 'development') => {
     demoInfos = await resolveDemoInfos(
       mdLayer[demoIndex].text,
       relativeDir,
-      env
+      env,
+      langs
     )
     mdLayer.splice(demoIndex, 1, {
       type: 'html',
@@ -270,7 +310,8 @@ const mdToDoc = async (code, relativeDir, env = 'development') => {
     demoInfos,
     components,
     relativeDir,
-    forceShowAnchor
+    forceShowAnchor,
+    langs
   )
   return `${docTemplate}\n\n${docScript}`
 }

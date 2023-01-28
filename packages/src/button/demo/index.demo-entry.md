@@ -1,8 +1,10 @@
-# 按钮 Button
+# zh-CN: 按钮, en: Button
 
-按钮用来触发一些操作。
+zh-CN: 按钮用来触发一些操作。
 
-## 演示
+en: xxxxxx
+
+## zh-CN: 演示, en: Demo
 
 ```demo
 basic.vue

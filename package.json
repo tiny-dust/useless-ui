@@ -31,7 +31,8 @@
     "date-fns": "^2.29.3",
     "highlight.js": "^11.7.0",
     "pinia": "^2.0.28",
-    "vooks": "^0.2.12"
+    "vooks": "^0.2.12",
+    "vue-i18n": "^9.2.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",

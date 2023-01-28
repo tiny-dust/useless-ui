@@ -1,8 +1,8 @@
-# 时间 Clock
+# zh-CN: 时间 Clock, en-US: Clock
 
-拟态时钟啦
+zh-CN: 拟态时钟啦 en-US: Relief Clock
 
-## 演示
+## zh-CN: 演示, en-US: Demo
 
 ```demo
 basic.vue
@@ -12,26 +12,6 @@ basic.vue
 
 ### Button Props
 
-| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| Name | Type | Default | Description | Vision |
 | --- | --- | --- | --- | --- |
-| attr-type | `'button' \| 'submit' \| 'reset'` | `'button'` | 按钮的 DOM 的 `type` 属性 |  |
-
-### ButtonGroup Props
-
-| 名称     | 类型      | 默认值  | 说明               |
-| -------- | --------- | ------- | ------------------ |
-| vertical | `boolean` | `false` | 组内按钮的排列方式 |
-
-### Button Slots
-
-| 名称    | 参数 | 说明       |
-| ------- | ---- | ---------- |
-| default | `()` | 按钮的内容 |
-
-### ButtonGroup Slots
-
-| 名称    | 参数 | 说明         |
-| ------- | ---- | ------------ |
-| default | `()` | 按钮组的内容 |
-
-<!-- anchor:on -->
+| attr-type | `'button' \| 'submit' \| 'reset'` | `'button'` | zh-CN:按钮的 DOM 的 `type` 属性;en-US:The `type` attribute of the button's DOM |  |

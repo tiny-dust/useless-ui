@@ -33,7 +33,7 @@ function getPartsOfDemo (text) {
   const script = text.match(/<script.*?>([\s\S]*?)<\/script>/)?.[1]?.trim()
   const style = text.match(/<style>([\s\S]*?)<\/style>/)?.[1]
   const markdownText = text
-    .match(/<markdown>([\s\S]*?)<\/markdown>/)?.[1]
+    .match(/<markdown lang="zh-CN">([\s\S]*?)<\/markdown>/)?.[1]
     ?.trim()
   const tokens = marked.lexer(markdownText)
   const contentTokens = []

@@ -29,7 +29,8 @@ import {
   NLayoutHeader,
   NLayoutSider,
   NMenu,
-  NDivider
+  NDivider,
+  NDropdown
 } from 'naive-ui'
 import { App } from 'vue'
 
@@ -42,6 +43,7 @@ const naive = create({
     NText,
     NTable,
     NAnchor,
+    NDropdown,
     NAnchorLink,
     NButton,
     NTab,

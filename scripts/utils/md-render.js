@@ -5,6 +5,29 @@ function createRender (wrapCodeWithCard = true) {
   const renderer = new marked.Renderer()
   const overrides = {
     table (header, body) {
+      header = header
+        .replace(/<th>/g, '<th>{{ t("')
+        .replace(/<\/th>/g, '") }}</th>')
+      // 处理body  获取td标签之间的内容 按照tr处理成数组
+      const trArr = body.split('</tr>').filter((item) => item.trim())
+      trArr.forEach((tr) => {
+        // 继续按照td 分组 获取td标签之间的内容
+        const tdArr = tr.split('</td>').filter((item) => item.trim())
+        tdArr.forEach((td) => {
+          // 如果标签内有 zh-CN这类的内容  按照;分组 处理成{{{'zh-CN': 'xxx','en-US':xxx}[locale]}}
+          if (td.includes('zh-CN') || td.includes('en-US')) {
+            const localeArr = td.split(';').filter((item) => item.trim())
+            const localeObj = {}
+            localeArr.forEach((locale) => {
+              const [key, value] = locale.split(':')
+              localeObj[key.trim()] = value
+            })
+            const localeStr = JSON.stringify(localeObj).replace(/<td>/g, '')
+            body = body.replace(td, `<td>{{${localeStr}[locale]}}`)
+          }
+        })
+      })
+
       if (body) body = '<tbody>' + body + '</tbody>'
       return (
         '<div class="md-table-wrapper"><n-table single-column class="md-table">\n' +
@@ -50,7 +73,10 @@ function createRender (wrapCodeWithCard = true) {
         : content
     },
     heading: (text, level) => {
-      const id = text.replace(/ /g, '-')
+      let id = text.replace(/ /g, '-')
+      if (level === 2) {
+        id = text.split(' ').pop()
+      }
       return `<n-h${level} id="${id}">${text}</n-h${level}>`
     },
     blockquote: (quote) => {

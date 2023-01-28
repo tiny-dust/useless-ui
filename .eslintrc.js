@@ -88,6 +88,13 @@ module.exports = {
       }
     },
     {
+      files: ['*.md'],
+      processor: 'markdown/markdown',
+      rules: {
+        'MD025/single-title/single-h1': 0
+      }
+    },
+    {
       files: '*',
       globals: {
         __DEV__: 'readonly'
