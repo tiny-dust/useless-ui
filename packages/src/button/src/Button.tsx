@@ -1,5 +1,5 @@
 // vue3.0 项目中的 button 组件
-import { computed, defineComponent } from 'vue'
+import { h, computed, defineComponent } from 'vue'
 import useTheme from '../../../hooks/useTheme'
 import { alpha } from '../../../utils/color'
 import './style/index.less'
@@ -17,7 +17,7 @@ export type ButtonProps = typeof buttonProps
 const Button = defineComponent({
   name: 'Button',
   props: buttonProps,
-  setup (props, { slots }) {
+  setup (props) {
     const { theme, isDark } = useTheme()
     const reliefStyle = computed(() => {
       const relief = theme.value.relief
@@ -52,10 +52,10 @@ const Button = defineComponent({
     }
   },
   render () {
-    const { reliefStyle, reliefCss, $attrs } = this
+    const { reliefStyle, reliefCss, $attrs, $slots } = this
     return (
       <button class={reliefCss} style={reliefStyle} {...$attrs}>
-        {this.$slots.default?.()}
+        {$slots.default?.()}
       </button>
     )
   }

@@ -1,5 +1,5 @@
 // vue3.0 项目中的 button 组件
-import { computed, CSSProperties, defineComponent, PropType } from 'vue'
+import { h, computed, CSSProperties, defineComponent, PropType } from 'vue'
 import './style/index.less'
 
 interface Size {

@@ -29,15 +29,7 @@ const baseConfig = defineConfig({
     }),
     commonjs()
   ],
-  external: ['vue'],
-  output: {
-    name: 'useless',
-    format: 'umd',
-    exports: 'named',
-    globals: {
-      vue: 'Vue'
-    }
-  }
+  external: ['vue']
 })
 
 const devConfig = defineConfig({
@@ -66,9 +58,27 @@ const prodConfig = defineConfig({
     }),
     terser()
   ],
-  output: {
-    file: path.resolve('dist/index.prod.js')
-  }
+  output: [
+    {
+      name: 'useless',
+      format: 'umd',
+      exports: 'named',
+      dir: 'dist',
+      globals: {
+        vue: 'Vue'
+      }
+    },
+    {
+      format: 'es',
+      exports: 'named',
+      dir: 'es'
+    },
+    {
+      format: 'cjs',
+      exports: 'named',
+      dir: 'lib'
+    }
+  ]
 })
 
 module.exports = [merge(baseConfig, devConfig), merge(baseConfig, prodConfig)]

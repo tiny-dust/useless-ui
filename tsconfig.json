@@ -1,19 +1,13 @@
 {
   "compilerOptions": {
-    "paths": {
-      "useless-ui": ["./packages/index.ts"],
-      "useless-ui/hooks": ["./packages/hooks.ts"],
-    },
-    "outDir":"./",
     "strict": true,
     "strictNullChecks": true,
     "jsx": "preserve",
-    "allowJs": true,
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",
     "noImplicitAny": true,
     "noUnusedLocals": false,
-    "module": "esnext",
+    "module": "ES6",
     "moduleResolution": "Node",
     "declaration": true,
     "forceConsistentCasingInFileNames": true,
