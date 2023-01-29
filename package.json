@@ -20,7 +20,7 @@
     "preview": "vite preview",
     "commit": "git add . && git-cz",
     "build:packages": "pnpm run clean && pnpm run gen-version && tsc -b --force tsconfig.esm.json && tsc -b --force tsconfig.cjs.json && rollup -c --environment production",
-    "clean": "rimraf site lib es dist",
+    "clean": "rimraf site lib es dist node_modules/useless-ui",
     "gen-version": "node scripts/gen-version",
     "release": "release-it",
     "test": "vitest",
