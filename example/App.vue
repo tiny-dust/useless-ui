@@ -1,7 +1,8 @@
 <script setup lang="ts"></script>
 
 <template>
-  <n-config-provider
+  <component
+    :is="configProvider"
     class="demo"
     namespace="naive-ui-doc"
     preflight-style-disabled
@@ -10,14 +11,17 @@
     <n-message-provider>
       <router-view />
     </n-message-provider>
-  </n-config-provider>
+  </component>
 </template>
 <script setup lang="ts">
 import hljs from './utils/hljs.js'
 import { useSystemStore } from './store'
 import { i18n } from './utils/composables'
-import { computed } from 'vue'
+import { storeToRefs } from 'pinia'
+import { NConfigProvider } from 'naive-ui'
 
-const { locale } = useSystemStore()
-i18n.provide(computed(() => locale))
+const configProvider = NConfigProvider
+
+const { locale } = storeToRefs(useSystemStore())
+i18n.provide(locale)
 </script>

@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 export const SystemStore = defineStore('System', {
   state: () => ({
     theme: 'dark',
-    locale: 'zh-CN'
+    locale: ''
   }),
   actions: {
     getTheme () {

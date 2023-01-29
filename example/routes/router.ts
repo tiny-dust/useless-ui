@@ -12,6 +12,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const { lang } = to.params
+  console.log('15-「router」', lang)
   setLocale(lang as string)
   next()
 })

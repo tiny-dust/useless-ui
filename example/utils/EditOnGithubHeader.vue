@@ -41,7 +41,7 @@ export default defineComponent({
   },
   computed: {
     id () {
-      return this.text.replace(/ /g, '-')
+      return this.text?.replace(/ /g, '-')
     }
   }
 })

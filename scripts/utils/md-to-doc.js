@@ -3,6 +3,7 @@ import fse from 'fs-extra'
 import path from 'path'
 import createRender from './md-render'
 import projectPath from './project-path'
+import deepMerge from './deep-merge'
 
 const mdRenderer = createRender()
 
@@ -149,7 +150,7 @@ const resolveDemoInfos = async (demoInfos, relativeDir, env, langs) => {
     }
     const componentName = `${cameLCase(demo)}Demo`
     demos.push({
-      id: demo,
+      id: demo.replace(/\.demo|\.vue/g, ''),
       variable: componentName,
       fileName,
       title: await resolveDemoTitle(fileName, relativeDir, langs),
@@ -188,6 +189,24 @@ const genDocScript = (
     .concat(components.map(({ importStmts }) => importStmts))
     .join('\n')
 
+  const tableMessage = {
+    'zh-CN': {
+      Name: '名称',
+      Description: '描述',
+      Type: '类型',
+      Default: '默认值',
+      Version: '版本'
+    },
+    'en-US': {
+      Name: 'Name',
+      Description: 'Description',
+      Type: 'Type',
+      Default: 'Default',
+      Version: 'Version'
+    }
+  }
+  // 深度合并langs和tableMessage
+  langs = deepMerge(langs, tableMessage)
   // 生成components语句
   // const componentsStmts = demoInfos.map(({ variable }) => {
   //   return `${variable}`
@@ -282,6 +301,7 @@ const mdToDoc = async (code, relativeDir, env = 'development') => {
       text: genDemosTemplate(demoInfos, colSpan)
     })
   }
+  console.log(demoInfos, 'demoInfos')
 
   const docMainTemplate = marked.parser(mdLayer, {
     renderer: mdRenderer,

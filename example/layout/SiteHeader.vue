@@ -6,25 +6,26 @@
     </n-text>
     <div />
     <div class="nav-end">
-      <n-dropdown
-        show-arrow
-        :options="langs"
-        default="zh-CN"
-        @select="changeLang"
-      >
-        <n-text>{{ lang.label }}</n-text>
-      </n-dropdown>
+      <n-button @click="changeLang">
+        {{ langText }}
+      </n-button>
     </div>
   </n-layout-header>
 </template>
 <script lang="ts" setup>
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useIsMobile } from '../utils/composables'
-import { computed, reactive } from 'vue'
+import { computed } from 'vue'
 import { useSystemStore } from '../store'
-const { setLocale } = useSystemStore()
+import { storeToRefs } from 'pinia'
+const { locale } = storeToRefs(useSystemStore())
 const isMobileRef = useIsMobile()
 const router = useRouter()
+const route = useRoute()
+
+const langText = computed(() => {
+  return locale.value === 'zh-CN' ? '中文' : 'English'
+})
 
 const style = computed(() => {
   return isMobileRef.value
@@ -38,29 +39,19 @@ const style = computed(() => {
       }
 })
 
-let lang = reactive({
-  label: '中文',
-  key: 'zh-CN'
-})
-
-const langs = [
-  {
-    label: '中文',
-    key: 'zh-CN'
-  },
-  {
-    label: 'English',
-    key: 'en'
-  }
-]
-
 const handleLogoClick = () => {
   router.push('/')
 }
 
-const changeLang = (key: string, current: { label: string; key: string }) => {
-  lang = current
-  setLocale(key)
+const changeLang = () => {
+  const curLang = locale.value === 'zh-CN' ? 'en-US' : 'zh-CN'
+  // 获取当前路由name
+  const curRouteName = route.name ?? 'home'
+  router.push({
+    name: curRouteName,
+    params: { lang: curLang },
+    query: route.query
+  })
 }
 </script>
 

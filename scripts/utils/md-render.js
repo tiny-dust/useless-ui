@@ -1,6 +1,20 @@
 const hljs = require('highlight.js')
 const { marked } = require('marked')
 
+const dealLocale = (body) => {
+  if (body.includes('zh-CN') || body.includes('en-US')) {
+    const localeArr = body.split(';').filter((item) => item.trim())
+    const localeObj = {}
+    localeArr.forEach((locale) => {
+      const [key, value] = locale.split(':')
+      localeObj[key.trim()] = value
+    })
+    const localeStr = JSON.stringify(localeObj)
+    body = `{{${localeStr}[locale]}}`
+  }
+  return body
+}
+
 function createRender (wrapCodeWithCard = true) {
   const renderer = new marked.Renderer()
   const overrides = {
@@ -77,6 +91,7 @@ function createRender (wrapCodeWithCard = true) {
       if (level === 2) {
         id = text.split(' ').pop()
       }
+      text = dealLocale(text)
       return `<n-h${level} id="${id}">${text}</n-h${level}>`
     },
     blockquote: (quote) => {
@@ -84,6 +99,7 @@ function createRender (wrapCodeWithCard = true) {
     },
     hr: () => '<n-hr />',
     paragraph: (text) => {
+      text = dealLocale(text)
       return `<n-p>${text}</n-p>`
     },
     link (href, title, text) {

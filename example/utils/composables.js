@@ -24,7 +24,6 @@ export function useIsSmallDesktop () {
 
 export const i18n = (message) => {
   const localeReactive = inject('i18n', null)
-
   return {
     locale: toRef(localeReactive, 'locale'),
     t (key) {
@@ -37,9 +36,7 @@ export const i18n = (message) => {
 i18n.provide = function (localeRef) {
   const localeReactive = reactive({})
   watchEffect(() => {
-    // 获取浏览器语言
-    const browserLang = navigator.language
-    localeReactive.locale = localeRef.value ?? browserLang
+    localeReactive.locale = localeRef.value
   })
   provide('i18n', localeReactive)
 }

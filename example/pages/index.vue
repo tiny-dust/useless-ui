@@ -17,7 +17,7 @@ const { t } = i18n({
   'zh-CN': {
     home: '主页'
   },
-  en: {
+  'en-US': {
     home: 'Home'
   }
 })

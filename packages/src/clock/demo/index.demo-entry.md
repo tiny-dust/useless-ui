@@ -1,6 +1,6 @@
 # zh-CN: 时间 Clock, en-US: Clock
 
-zh-CN: 拟态时钟啦 en-US: Relief Clock
+zh-CN: 拟态时钟啦; en-US: Relief Clock;
 
 ## zh-CN: 演示, en-US: Demo
 
