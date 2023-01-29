@@ -1,7 +1,7 @@
 <template>
   <n-layout-header style="height: 64px" class="nav" bordered :style="style">
     <n-text tag="div" class="ui-logo" :depth="1" @click="handleLogoClick">
-      <img src="../assets/logo.png">
+      <img src="../assets/logo.png" alt="useless ui logo">
       <span>Useless UI</span>
     </n-text>
     <div />

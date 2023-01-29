@@ -1,10 +1,5 @@
 const transformIndexHtml = (code) => {
-  switch (process.env.NODE_ENV) {
-    case 'production':
-      return code.replace(/__INDEX__/, '/example/main.ts')
-    default:
-      return code.replace(/__INDEX__/, '/example/main.ts')
-  }
+  return code.replace(/__INDEX__/, '/example/main.ts')
 }
 
 const demoIndexTransFormPlugin = {

@@ -301,7 +301,6 @@ const mdToDoc = async (code, relativeDir, env = 'development') => {
       text: genDemosTemplate(demoInfos, colSpan)
     })
   }
-  console.log(demoInfos, 'demoInfos')
 
   const docMainTemplate = marked.parser(mdLayer, {
     renderer: mdRenderer,
