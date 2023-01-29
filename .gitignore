@@ -1,7 +1,15 @@
-node_modules
-
-.DS_Store
-
+# git 忽略文件  vue组件库
 dist
-
+lib
+es
+.DS_Store
 .vscode
+.idea
+*.log
+*.iml
+*.swp
+*.lock
+*.zip
+*.tar.gz
+*.tgz
+node_modules

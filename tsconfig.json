@@ -1,9 +1,5 @@
 {
   "compilerOptions": {
-    "rootDir": ".",
-    "paths": {
-      "useless-ui": ["./packages/src"]
-    },
     "strict": true,
     "strictNullChecks": true,
     "jsx": "preserve",
@@ -19,5 +15,6 @@
     "target": "ES6",
     "esModuleInterop": true,
     "lib": ["ESNext", "DOM"]
-  }
+  },
+  "exclude": ["node_modules","dist"]
 }

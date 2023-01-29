@@ -1,35 +1,29 @@
-# 按钮 Button
+# zh-CN: 按钮, en-US: Button
 
-按钮用来触发一些操作。
+zh-CN: 按钮用来触发一些操作; en-US: Buttons are used to trigger some operations;
 
-## 演示
+## zh-CN: 演示; en-US: Demo
 
-```vue
-<<< ./basic.demo.vue
+```demo
+basic.vue
 ```
 
 ## API
 
 ### Button Props
 
-| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| Name | Type | Default | Description | Vision |
 | --- | --- | --- | --- | --- |
-| attr-type | `'button' \| 'submit' \| 'reset'` | `'button'` | 按钮的 DOM 的 `type` 属性 |  |
+| attr-type | `'button' \| 'submit' \| 'reset'` | `'button'` | zh-CN:按钮的 DOM 的 `type` 属性;en-US:The `type` attribute of the button's DOM |  |
 
 ### ButtonGroup Props
 
-| 名称     | 类型      | 默认值  | 说明               |
-| -------- | --------- | ------- | ------------------ |
-| vertical | `boolean` | `false` | 组内按钮的排列方式 |
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| vertical | `boolean` | `false` | zh-CN: 组内按钮的排列方式; en-US: Arrangement of buttons in the group |
 
 ### Button Slots
 
-| 名称    | 参数 | 说明       |
-| ------- | ---- | ---------- |
-| default | `()` | 按钮的内容 |
-
-### ButtonGroup Slots
-
-| 名称    | 参数 | 说明         |
-| ------- | ---- | ------------ |
-| default | `()` | 按钮组的内容 |
+| Name    | Default | Description                              |
+| ------- | ------- | ---------------------------------------- |
+| default | `()`    | zh-CN: 按钮的内容; en-US: Button content |
