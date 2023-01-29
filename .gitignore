@@ -2,6 +2,7 @@
 dist
 lib
 es
+site
 .DS_Store
 .vscode
 .idea

@@ -1,6 +1,7 @@
 import path from 'path'
 import { defineConfig } from 'vitest/config'
 import createVitePlugin from './scripts/vite-plugin.js'
+const { babel } = require('@rollup/plugin-babel')
 
 export default defineConfig({
   root: __dirname,
@@ -50,5 +51,21 @@ export default defineConfig({
   },
   server: {
     port: 5173
+  },
+  build: {
+    outDir: 'site',
+    output: {
+      manualChunks: {
+        'grapheme-splitter': ['grapheme-splitter'],
+        katex: ['katex']
+      }
+    },
+    rollupOptions: {
+      plugins: [
+        babel({
+          babelHelpers: 'bundled'
+        })
+      ]
+    }
   }
 })
