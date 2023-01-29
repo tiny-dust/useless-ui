@@ -16,7 +16,7 @@
   "scripts": {
     "dev": "vite",
     "build": "rollup -c",
-    "build:site": "vite build",
+    "build:site": "./scripts/pre-build-site/pre-build-site.sh && NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && ./scripts/post-build-site/post-build-site.sh",
     "preview": "vite preview",
     "commit": "git add . && git-cz",
     "build:packages": "pnpm run clean && pnpm run gen-version && tsc -b --force tsconfig.esm.json && tsc -b --force tsconfig.cjs.json && rollup -c --environment production",
