@@ -26,22 +26,28 @@ function createRender (wrapCodeWithCard = true) {
       const trArr = body.split('</tr>').filter((item) => item.trim())
       trArr.forEach((tr) => {
         // 继续按照td 分组 获取td标签之间的内容
-        const tdArr = tr.split('</td>').filter((item) => item.trim())
+        const tdArr = tr
+          .replace(/<td>/g, '')
+          .split('</td>')
+          .filter((item) => item.trim())
         tdArr.forEach((td) => {
-          // 如果标签内有 zh-CN这类的内容  按照;分组 处理成{{{'zh-CN': 'xxx','en-US':xxx}[locale]}}
+          // 如果标签内有 zh-CN这类的内容  按照;分组 处理成<td v-if="locale === 'zh-CN'">这样的
           if (td.includes('zh-CN') || td.includes('en-US')) {
             const localeArr = td.split(';').filter((item) => item.trim())
-            const localeObj = {}
-            localeArr.forEach((locale) => {
+            const localeTd = localeArr.map((locale, i) => {
               const [key, value] = locale.split(':')
-              localeObj[key.trim()] = value
+              const tag = {
+                0: `v-if="locale === '${key.trim()}'"`,
+                [localeArr.length - 1]: 'v-else'
+              }
+              return `<td ${
+                tag[i] ?? `v-else-if="locale === '${key.trim()}'"`
+              } >${value}</td>`
             })
-            const localeStr = JSON.stringify(localeObj).replace(/<td>/g, '')
-            body = body.replace(td, `<td>{{${localeStr}[locale]}}`)
+            body = body.replace(`<td>${td.trim()}</td>`, localeTd.join('\n'))
           }
         })
       })
-
       if (body) body = '<tbody>' + body + '</tbody>'
       return (
         '<div class="md-table-wrapper"><n-table single-column class="md-table">\n' +

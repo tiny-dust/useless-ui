@@ -207,14 +207,10 @@ const genDocScript = (
   }
   // 深度合并langs和tableMessage
   langs = deepMerge(langs, tableMessage)
-  // 生成components语句
-  // const componentsStmts = demoInfos.map(({ variable }) => {
-  //   return `${variable}`
-  // }).concat(components.map(({ compName }) => compName).flat()).join(',\n') // flat() 方法创建一个新数组，它将数组中的元素连接起来，最多只能连接到指定的深度。
   const script = `
   <script setup>
     ${importStmts}
-    import { computed } from 'vue'
+    import { computed, h } from 'vue'
     import { useMemo } from 'vooks'
     import { useIsMobile } from '/example/utils/composables'
     import { i18n } from '/example/utils/composables'
@@ -325,7 +321,7 @@ const mdToDoc = async (code, relativeDir, env = 'development') => {
         </div>
       </div>
     </template>`
-  const docScript = await genDocScript(
+  const docScript = genDocScript(
     demoInfos,
     components,
     relativeDir,

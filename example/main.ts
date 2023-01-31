@@ -6,7 +6,7 @@ import './styles/demo.css'
 import setupNaive from './components/naive'
 import setupUseless from './components/useless'
 import { setupStore } from './store'
-import 'useless-ui/dist/index.css'
+// import 'useless-ui/dist/index.css'
 
 const app = createApp(App)
 

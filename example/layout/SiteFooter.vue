@@ -81,6 +81,7 @@ defineProps({
 }
 
 .col-header {
+  font-weight: 500;
   white-space: nowrap;
 }
 
@@ -101,10 +102,6 @@ defineProps({
 
 .footer-links-col > * {
   line-height: 2;
-}
-
-.col-header {
-  font-weight: 500;
 }
 
 .link {

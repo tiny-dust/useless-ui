@@ -137,7 +137,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const isDebugDemo = /(d|D)ebug/.test(props.demoFileName)
+    const isDebugDemo = /([dD])ebug/.test(props.demoFileName)
     const showDemoRef = computed(() => {
       return !isDebugDemo
     })

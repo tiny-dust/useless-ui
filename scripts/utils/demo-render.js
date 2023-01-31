@@ -9,7 +9,10 @@ const __HTTP__ = process.env.NODE_ENV !== 'production' ? 'http' : 'https'
 const demoBlock = fs
   .readFileSync(path.resolve(__dirname, 'ComponentDemoTemplate.vue'))
   .toString()
-export const mdToDemo = () => {}
+
+export const mdToDemo = (code, config) => {
+  console.log(code, config)
+}
 
 // 合并template、script、style、markdown等数据
 const mergeParts = ({ parts, isVue }) => {
